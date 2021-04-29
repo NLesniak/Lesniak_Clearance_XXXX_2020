@@ -340,7 +340,7 @@ plot_temporal_diff_by_clearance <- function(end_status, antibiotics, lod_label_d
 diff_abund_cleared_plot <- plot_temporal_diff_by_clearance(end_status = 'Cleared', 
 	antibiotics = c('Clindamycin', 'Streptomycin'), lod_label_df = main_lod_label_df) + 
 	facet_grid(abx~comparison, scales = 'free_y', space = 'free',
-		labeller = labeller(comparison = c(Initial_TOC = "Initial vs Time of challenge", TOC_End = "Time of challenge vs End of experiment"))) + 
+		labeller = labeller(comparison = c(Initial_TOC = "Initial vs TOC", TOC_End = "TOC vs End of experiment"))) + 
 	scale_shape_manual(values = c(1,16), limits = c('Cleared', 'Colonized')) + 
 	theme(panel.spacing.y = unit(1, 'lines'),
 		legend.position = 'bottom',
@@ -353,8 +353,8 @@ fills <- c(pull(filter(abx_color, abx == 'Clindamycin'), color),
 diff_abund_cleared_plot <- edit_facet_background(diff_abund_cleared_plot, fills)
 # attach labels to this part of figure
 diff_abund_cleared_plot <- plot_grid(
-	plot_grid(NULL, NULL, labels = c('A', 'B'), ncol = 1, rel_heights = c(9,5)),
-	diff_abund_cleared_plot, nrow = 1, rel_widths = c(1,19))
+	plot_grid(NULL, NULL, labels = c('A', 'B'), ncol = 1, rel_heights = c(8,5.2)),
+	diff_abund_cleared_plot, nrow = 1, rel_widths = c(.5,19))
 
 ###############################################################################
 # plot difference between time points of mice that remained colonized by C diff
@@ -362,7 +362,7 @@ diff_abund_cleared_plot <- plot_grid(
 diff_abund_colon_plot <- plot_temporal_diff_by_clearance(end_status = 'Colonized',
 	antibiotics = c('Cefoperazone', 'Streptomycin'), lod_label_df = main_lod_label_df) + 
 	facet_grid(abx~comparison, scales = 'free_y', space = 'free',
-		labeller = labeller(comparison = c(Initial_TOC = "Initial vs Time of challenge", TOC_End = "Time of challenge vs End of experiment"))) + 
+		labeller = labeller(comparison = c(Initial_TOC = "Initial vs TOC", TOC_End = "TOC vs End of experiment"))) + 
 	theme(panel.spacing.y = unit(1, 'lines'))
 # edit colors of facel label backgrounds
 fills <- c(pull(filter(abx_color, abx == 'Cefoperazone'), color),
@@ -372,13 +372,13 @@ diff_abund_colon_plot <- edit_facet_background(diff_abund_colon_plot, fills)
 # attach labels to this part of figure
 diff_abund_colon_plot <- plot_grid(
 	plot_grid(NULL, NULL, labels = c('C', 'D'), ncol = 1, rel_heights = c(8,5)),
-	diff_abund_colon_plot, nrow = 1, rel_widths = c(1,19))
+	diff_abund_colon_plot, nrow = 1, rel_widths = c(.5,19))
 
 # plot single difference between time points of mice that cleared C diff for cef
 cef_cleared_supp_plot <- plot_temporal_diff_by_clearance(end_status = 'Cleared', 
 	antibiotics = c('Cefoperazone'), lod_label_df = cef_lod_label_df) + 
 	facet_grid(abx~comparison, scales = 'free_y', space = 'free',
-		labeller = labeller(comparison = c(Initial_TOC = "Initial vs Time of challenge", TOC_End = "Time of challenge vs End of experiment"))) +
+		labeller = labeller(comparison = c(Initial_TOC = "Initial vs\nTime of Challenge", TOC_End = "Time of Challenge vs\nEnd of experiment"))) +
 	theme(legend.position = 'bottom',
 		    legend.background = element_rect(colour = 'black')) + 
 	guides(shape = 'none',
